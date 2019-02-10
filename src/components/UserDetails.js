@@ -36,6 +36,7 @@ class UserDetails extends Component {
           />
           <label>Email Id</label>
           <input
+            style={{ marginBottom: "5px" }}
             onChange={event => {
               this.setState({ emailId: event.target.value });
             }}

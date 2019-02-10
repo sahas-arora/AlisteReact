@@ -1,1 +1,1 @@
-export const FETCH_USER = "FETCH_USER";
+// export default const SETUP_HOUSE = "SETUP_HOUSE");
