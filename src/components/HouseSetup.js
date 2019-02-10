@@ -17,8 +17,26 @@ class HouseSetup extends Component {
   onSubmit(event) {
     event.preventDefault();
 
-    this.setupHose;
+    this.setupHouse(
+      this.state.houseName,
+      this.state.rooms,
+      this.state.masters,
+      this.state.creator
+    );
     this.setState({ houseName: "", rooms: [], masters: [], creator: "" });
+  }
+
+  renderFields(props) {
+    return (
+      <div className="container">
+        <label>House Name</label>
+        <input
+          type="text"
+          onChange={event => this.setState({ houseName: event.target.value })}
+          value={this.state.houseName}
+        />
+      </div>
+    );
   }
 
   render() {
