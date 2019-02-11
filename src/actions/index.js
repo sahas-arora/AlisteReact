@@ -24,12 +24,12 @@ let loggedUser = (name, emailId) => async dispactch => {
   });
 };
 
-export const setupHose = (name, rooms, masters, creator) => async dispactch => {
+export const setupHouse = (name, rooms, masters) => async dispactch => {
   let data = {
     houseName: name,
-    rooms: rooms,
-    masters: masters,
-    createdBy: creator
+    rooms: [rooms],
+    masters: [masters],
+    createdBy: masters
   };
 
   let response = await axios.post(
