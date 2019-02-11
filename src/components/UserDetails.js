@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 
 import loggedUser from "../actions";
 
@@ -43,11 +44,12 @@ class UserDetails extends Component {
             type="text"
             value={this.state.emailId}
           />
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">
-              Submit
-            </button>
-          </span>
+          <Link to="/" className="red btn-flat left white-text">
+            Cancel
+          </Link>
+          <Link to="/HouseSetup" className="green btn-flat right white-text">
+            Submit
+          </Link>
         </form>
       </div>
     );

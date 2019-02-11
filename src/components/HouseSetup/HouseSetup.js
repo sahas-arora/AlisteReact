@@ -1,22 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 
 import { setupHouse } from "../../actions";
 import houseSetupFields from "./houseSetupFields";
 import HouseSetupFormFields from "./HouseSetupFormFields";
 
+let rooms = [];
+let masters = [];
+
 class HouseSetup extends Component {
   constructor(props) {
     super(props);
 
-    let rooms = [];
-    let masters = [];
-    this.state = { houseName: "", rooms: rooms, masters: masters, creator: "" };
+    this.state = {
+      houseName: "",
+      rooms: [],
+      masters: masters,
+      creator: "",
+      clicked: false
+    };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.renderFields = this.renderFields.bind(this);
+    this.addRoom = this.addRoom.bind(this);
   }
 
   onSubmit(event) {
@@ -30,7 +39,32 @@ class HouseSetup extends Component {
       this.state.masters,
       this.state.creator
     );
-    this.setState({ houseName: "", rooms: [], masters: [], creator: "" });
+    this.setState({
+      houseName: "",
+      rooms: rooms,
+      masters: [],
+      creator: "",
+      clicked: false
+    });
+  }
+
+  addRoom() {
+    this.setState({ clicked: true });
+
+    if (this.state.clicked) {
+      return (
+        <input
+          type="text"
+          onChange={event => {
+            this.setState({ rooms: event.target.value });
+          }}
+          value={this.state.rooms}
+        />
+      );
+    }
+    console.log("state was changed");
+    console.log("The rooms are: ", this.state.rooms);
+    this.setState({ clicked: false });
   }
 
   renderFields() {
@@ -47,14 +81,19 @@ class HouseSetup extends Component {
         <br />
         <label>Rooms</label>
         <input
-          placeholder="Enter the names of the rooms seperated by a comma"
+          placeholder="Enter the names of the rooms"
           type="text"
           onChange={event => {
             // let rooms = [];
+
             this.setState({ rooms: event.target.value });
           }}
           value={this.state.rooms}
         />
+        <button className="blue btn-flat white-text" onClick={this.addRoom}>
+          Add more rooms
+        </button>
+
         <br />
         <br />
         <label>Masters</label>
@@ -77,7 +116,12 @@ class HouseSetup extends Component {
     return (
       <form className="ui form" onSubmit={this.onSubmit}>
         <div>{this.renderFields()}</div>
-        <button type="submit">Submit</button>
+        <Link className="red btn-flat left white-text" to="/UserDetails">
+          <button>Back</button>
+        </Link>
+        <Link className="green btn-flat right white-text" to="/DeviceSetup">
+          <button type="submit">Submit</button>
+        </Link>
       </form>
     );
   }
